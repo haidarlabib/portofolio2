@@ -15,7 +15,7 @@ import { useIsMobile } from "@/lib/useIsMobile";
 import { SKILLS_FLAT, STACK_TO_SLUG } from "@/lib/skills";
 import type { Lang } from "@/lib/i18n";
 
-const EMAIL = "josemariaalberobelamendia@gmail.com";
+const EMAIL = "izzakief280@gmail.com";
 
 // Localised content lives in `{ es, en }` objects inside these arrays so the
 // page can be a straightforward array.map() at render time. Tech names stay
