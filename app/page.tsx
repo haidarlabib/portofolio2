@@ -316,7 +316,9 @@ export default function Home() {
               <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[8.5rem] font-bold tracking-[-0.03em] text-ice-50 leading-[0.92] whitespace-nowrap">
                 <HeroWord text="Haidar" delay={120} />
                 <br />
-                <HeroWord text="Labib Izzakif" delay={260} className="text-ice-400" />
+                <HeroWord text="Labib" delay={200} className="text-ice-400" />
+                <br />
+                <HeroWord text="Izzakif" delay={280} className="text-ice-400" />
               </h1>
               <p
                 className="mt-8 text-base sm:text-lg md:text-xl text-ice-200 max-w-xl leading-relaxed fade-in-up"
