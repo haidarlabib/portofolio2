@@ -216,6 +216,38 @@ const experiences: Array<{
     ],
     stack: ["Tableau", "Power BI", "Excel", "Android", "Google Sheets"],
   },
+  {
+    role: {
+      id: "Administration Intern",
+      en: "Administration Intern",
+    },
+    company: "BPJS Ketenagakerjaan",
+    period: { id: "Februari 2025 – Mei 2025", en: "February 2025 – May 2025" },
+    location: { id: "Bekasi, Indonesia", en: "Bekasi, Indonesia" },
+    summary: {
+      id: "Mendukung proses administrasi kepesertaan dengan melakukan input, verifikasi, dan pembaruan data peserta untuk memastikan informasi tercatat secara akurat dan sesuai kebutuhan administrasi.",
+      en: "Supporting the membership administration process by inputting, verifying, and updating participant data to ensure accurate records in accordance with administrative standards.",
+    },
+    bullets: [
+      {
+        id: "Data entry — memproses pendaftaran dan pembatalan kepesertaan untuk program khusus dengan volume lebih dari 100 peserta per hari.",
+        en: "Data entry — processing membership registrations and cancellations for special programs with a volume of over 100 participants per day.",
+      },
+      {
+        id: "Data verification — memeriksa dan mencocokkan informasi peserta serta melakukan koreksi terhadap data yang tidak sesuai.",
+        en: "Data verification — checking and cross-referencing participant information and correcting any inconsistent data.",
+      },
+      {
+        id: "Administrative processing — mengelola dan memperbarui data kepesertaan sesuai proses administrasi yang berlaku.",
+        en: "Administrative processing — managing and updating membership records in compliance with standard administrative procedures.",
+      },
+      {
+        id: "Billing support — membantu proses pengingat pembayaran kepada peserta untuk mendukung kelancaran administrasi kepesertaan.",
+        en: "Billing support — assisting with payment reminder notifications to participants to maintain smooth membership administration.",
+      },
+    ],
+    stack: ["Excel", "Data Entry", "Data Validation", "Administration"],
+  },
 ];
 
 function pick<T>(loc: Record<Lang, T>, lang: Lang): T {
