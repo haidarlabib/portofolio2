@@ -248,6 +248,38 @@ const experiences: Array<{
     ],
     stack: ["Excel", "Data Entry", "Data Validation", "Administration"],
   },
+  {
+    role: {
+      id: "Guru – Teaching Program",
+      en: "Teacher – Teaching Program",
+    },
+    company: "Pondok Pesantren Ar-Ridho",
+    period: { id: "Mei 2020 – Juli 2021", en: "May 2020 – July 2021" },
+    location: { id: "Bogor, Indonesia", en: "Bogor, Indonesia" },
+    summary: {
+      id: "Mengajar literasi komputer dan Microsoft Office dengan fokus pada penggunaan Excel, pengolahan data dasar, serta keterampilan komputer yang dapat diterapkan untuk kebutuhan pembelajaran dan administrasi.",
+      en: "Teaching computer literacy and Microsoft Office with a focus on Excel usage, basic data processing, and practical computer skills applicable for educational and administrative needs.",
+    },
+    bullets: [
+      {
+        id: "Literasi komputer — mengajarkan dasar penggunaan komputer dan aplikasi Microsoft Office.",
+        en: "Computer literacy — teaching the fundamentals of computer usage and Microsoft Office applications.",
+      },
+      {
+        id: "Microsoft Excel — membimbing data entry, formatting, sorting, dan filtering data.",
+        en: "Microsoft Excel — guiding data entry, formatting, sorting, and filtering data.",
+      },
+      {
+        id: "Pengolahan data — mengajarkan penggunaan formula SUM, AVERAGE, COUNT, dan IF untuk pengolahan data dasar.",
+        en: "Data processing — teaching the use of formulas such as SUM, AVERAGE, COUNT, and IF for basic data processing.",
+      },
+      {
+        id: "Keterampilan kerja — membantu peserta memahami penggunaan teknologi secara praktis dan membangun keterampilan komunikasi serta kerja sama.",
+        en: "Workplace skills — helping students understand practical technology usage and building communication and teamwork skills.",
+      },
+    ],
+    stack: ["Excel", "Microsoft Office", "Data Entry", "Data Processing"],
+  },
 ];
 
 function pick<T>(loc: Record<Lang, T>, lang: Lang): T {
