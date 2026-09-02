@@ -73,3 +73,24 @@ export const SKILLS_GRID: readonly (readonly SkillIcon[])[] = [
 ] as const;
 
 export const SKILLS_FLAT: readonly SkillIcon[] = SKILLS_GRID.flat();
+
+export const STACK_TO_SLUG: Record<string, string> = {
+  Python: "python",
+  Pandas: "pandas",
+  NumPy: "numpy",
+  Regression: "scikitlearn",
+  Forecasting: "scikitlearn",
+  Flask: "flask",
+  PHP: "php",
+  SQL: "sql",
+  Excel: "excel",
+  "Power BI": "powerbi",
+  "Scikit-learn": "scikitlearn",
+  KNIME: "knime",
+  "Google Sheets": "googlesheets",
+  "Google Colab": "googlecolab",
+  "Looker Studio": "lookerstudio",
+  MySQL: "mysql",
+  Android: "android",
+  GitHub: "github",
+};

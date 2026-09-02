@@ -18,7 +18,7 @@ import {
 import { useSeason } from "@/components/SeasonProvider";
 import { useLanguage } from "@/components/LanguageProvider";
 import * as THREE from "three";
-import { SKILLS_GRID, type SkillIcon } from "@/lib/skills";
+import { SKILLS_GRID, SKILLS_FLAT, type SkillIcon } from "@/lib/skills";
 
 // Per-section keyboard "states" — same idea as Naresh's animated-background-
 // config.ts, but for our R3F keyboard. Values are tweened toward via lerp
@@ -182,7 +182,37 @@ function useActiveSection(): [
     );
     const targets = document.querySelectorAll<HTMLElement>("[data-kb-section]");
     targets.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+
+    const onHover = (e: Event) => {
+      const slug = (e as CustomEvent<string>).detail;
+      if (!slug) return;
+      const targetSlug =
+        slug === "php" && !SKILLS_FLAT.some((k) => k.slug === "php")
+          ? "flask"
+          : slug;
+      highlightsRef.current = new Set([targetSlug]);
+      const idx = SKILLS_FLAT.findIndex((k) => k.slug === targetSlug);
+      if (idx !== -1) {
+        playKeyClick(idx);
+      }
+    };
+    const onLeave = () => {
+      const activeEl = document.querySelector<HTMLElement>(
+        `[data-kb-section="${ref.current}"]`
+      );
+      const raw = activeEl?.dataset.kbHighlights ?? "";
+      highlightsRef.current = new Set(
+        raw.split(",").map((s) => s.trim()).filter(Boolean)
+      );
+    };
+    window.addEventListener("kb-chip-hover", onHover);
+    window.addEventListener("kb-chip-leave", onLeave);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("kb-chip-hover", onHover);
+      window.removeEventListener("kb-chip-leave", onLeave);
+    };
   }, []);
   return [section, ref, highlightsRef];
 }

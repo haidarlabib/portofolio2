@@ -12,7 +12,7 @@ import ProjectModal, {
 } from "@/components/ProjectModal";
 import { useLanguage } from "@/components/LanguageProvider";
 import { useIsMobile } from "@/lib/useIsMobile";
-import { SKILLS_FLAT } from "@/lib/skills";
+import { SKILLS_FLAT, STACK_TO_SLUG } from "@/lib/skills";
 import type { Lang } from "@/lib/i18n";
 
 const EMAIL = "josemariaalberobelamendia@gmail.com";
@@ -42,6 +42,9 @@ const projects: Project[] = [
       "Forecasting",
       "Flask",
       "PHP",
+      "Google Colab",
+      "Excel",
+      "GitHub",
     ],
     desc: {
       id: "Menganalisis hubungan harga dan permintaan berdasarkan ribuan transaksi penjualan untuk membantu memahami dampak perubahan harga terhadap penjualan dan profit.",
@@ -59,7 +62,17 @@ const projects: Project[] = [
       "/projects/elastisitas/elastisitas.png",
       "/projects/elastisitas/eda.png",
     ],
-    highlights: ["python", "pandas", "numpy", "flask"],
+    highlights: [
+      "python",
+      "pandas",
+      "numpy",
+      "scikitlearn",
+      "flask",
+      "php",
+      "googlecolab",
+      "excel",
+      "github",
+    ],
     align: "left",
     section: "project1",
   },
@@ -671,15 +684,28 @@ export default function Home() {
                         : "flex flex-wrap gap-1.5 pointer-events-auto mb-5"
                     }
                   >
-                    {p.stack.map((s) => (
-                      <span
-                        key={s}
-                        data-cursor="hover"
-                        className="frost-chip"
-                      >
-                        {s}
-                      </span>
-                    ))}
+                    {p.stack.map((s) => {
+                      const slug = STACK_TO_SLUG[s] || s.toLowerCase();
+                      return (
+                        <span
+                          key={s}
+                          data-cursor="hover"
+                          className="frost-chip"
+                          onMouseEnter={() => {
+                            window.dispatchEvent(
+                              new CustomEvent("kb-chip-hover", { detail: slug })
+                            );
+                          }}
+                          onMouseLeave={() => {
+                            window.dispatchEvent(
+                              new CustomEvent("kb-chip-leave")
+                            );
+                          }}
+                        >
+                          {s}
+                        </span>
+                      );
+                    })}
                   </div>
                 </Reveal>
                 <Reveal delay={320}>

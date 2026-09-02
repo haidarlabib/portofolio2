@@ -5,6 +5,7 @@ import { useLenis } from "lenis/react";
 import { useLanguage } from "@/components/LanguageProvider";
 import Carousel from "@/components/Carousel";
 import type { Lang } from "@/lib/i18n";
+import { STACK_TO_SLUG } from "@/lib/skills";
 
 type Localised = Record<Lang, string>;
 
@@ -200,11 +201,27 @@ export default function ProjectModal({ project, onClose }: Props) {
                   {t("projects.stackLabel")}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
-                  {project.stack.map((s) => (
-                    <span key={s} className="frost-chip">
-                      {s}
-                    </span>
-                  ))}
+                  {project.stack.map((s) => {
+                    const slug = STACK_TO_SLUG[s] || s.toLowerCase();
+                    return (
+                      <span
+                        key={s}
+                        className="frost-chip"
+                        onMouseEnter={() => {
+                          window.dispatchEvent(
+                            new CustomEvent("kb-chip-hover", { detail: slug })
+                          );
+                        }}
+                        onMouseLeave={() => {
+                          window.dispatchEvent(
+                            new CustomEvent("kb-chip-leave")
+                          );
+                        }}
+                      >
+                        {s}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             </div>
