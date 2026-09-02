@@ -43,12 +43,12 @@ export const DICT = {
   hero: {
     greeting: { id: "Halo, saya", en: "Hi, I am" },
     roleLine: {
-      id: "Software Engineer & Tech Lead.",
-      en: "Software Engineer & Tech Lead.",
+      id: "Data Analyst & Data Science Enthusiast.",
+      en: "Data Analyst & Data Science Enthusiast.",
     },
     tagline: {
-      id: "Spesialis ERP dan aplikasi full-stack untuk bisnis.",
-      en: "Specialised in ERPs and full-stack apps for businesses.",
+      id: "Mengubah data, proses bisnis, dan teknologi menjadi solusi yang bermanfaat.",
+      en: "Turning data, business processes, and technology into useful solutions.",
     },
     cv: { id: "Unduh CV", en: "Download CV" },
     hire: { id: "Hubungi saya", en: "Contact me" },
