@@ -92,7 +92,7 @@ export const DICT = {
       id: "Kirim pesan sekarang dan mari wujudkan ide menarik kamu bersama.",
       en: "If what you've seen interests you, the keyboard is ready for the first message.",
     },
-    copyEmail: { id: "Salin email", en: "Copy email" },
+    copyEmail: { id: "Kirim pesan", en: "Send message" },
     openMail: { id: "Email", en: "Open mailto" },
     github: { id: "GitHub", en: "GitHub" },
     linkedin: { id: "LinkedIn", en: "LinkedIn" },
