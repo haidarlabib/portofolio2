@@ -31,12 +31,12 @@ export const DICT = {
     home: { id: "Beranda", en: "Home" },
     stack: { id: "Tech Stack", en: "Stack" },
     experience: { id: "Pengalaman", en: "Experience" },
-    project: { id: "Proyek", en: "Project" },
+    project: { id: "Projek", en: "Project" },
     contact: { id: "Kontak", en: "Contact" },
   },
   header: {
     availability: {
-      id: "Terbuka untuk peluang",
+      id: "TERBUKA UNTUK BEKERJA",
       en: "Open to opportunities",
     },
   },
@@ -52,7 +52,7 @@ export const DICT = {
     },
     cv: { id: "Unduh CV", en: "Download CV" },
     hire: { id: "Hubungi saya", en: "Contact me" },
-    scroll: { id: "Gulir untuk eksplorasi", en: "Scroll to explore" },
+    scroll: { id: "", en: "Scroll to explore" },
     keysHint: {
       id: "· arahkan kursor ke tombol",
       en: "· hover over the keys",
@@ -65,19 +65,19 @@ export const DICT = {
       en: "(hint: hover over a key)",
     },
     hintMobile: {
-      id: "Alat yang saya gunakan untuk membangun.",
+      id: "Tools yang saya gunakan.",
       en: "The tools I build with.",
     },
   },
   experience: {
     title: { id: "Pengalaman", en: "Experience" },
     subtitle: {
-      id: "Perjalanan profesional saya.",
+      id: "Pengalaman yang saya tempuh.",
       en: "My professional journey.",
     },
   },
   projects: {
-    kicker: { id: "proyek", en: "project" },
+    kicker: { id: "projek", en: "project" },
     viewMore: { id: "Lihat selengkapnya", en: "View more" },
     openSite: { id: "Kunjungi situs", en: "Visit site" },
     viewCode: { id: "Lihat kode", en: "View code" },
@@ -87,13 +87,13 @@ export const DICT = {
   },
   contact: {
     kicker: { id: "kontak", en: "contact" },
-    title: { id: "Mari berdiskusi?", en: "Let's talk?" },
+    title: { id: "Tertarik Berkolaborasi?", en: "Let's talk?" },
     body: {
-      id: "Jika apa yang Anda lihat menarik bagi Anda, keyboard sudah siap menerima pesan pertama.",
+      id: "Kirim pesan sekarang dan mari wujudkan ide menarik kamu bersama.",
       en: "If what you've seen interests you, the keyboard is ready for the first message.",
     },
     copyEmail: { id: "Salin email", en: "Copy email" },
-    openMail: { id: "Buka mail", en: "Open mailto" },
+    openMail: { id: "Email", en: "Open mailto" },
     github: { id: "GitHub", en: "GitHub" },
     linkedin: { id: "LinkedIn", en: "LinkedIn" },
     emailToast: { id: "Email disalin", en: "Email copied" },

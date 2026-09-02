@@ -402,7 +402,7 @@ export default function Home() {
               style={{ ["--d" as string]: "900ms" }}
             >
               <span className="scroll-indicator">
-                <span>{t("hero.scroll")}</span>
+                {t("hero.scroll") && <span>{t("hero.scroll")}</span>}
                 <span className="scroll-indicator__rail" />
               </span>
               <span className="text-[11px] uppercase tracking-[0.25em] text-ice-400 hidden sm:inline">
