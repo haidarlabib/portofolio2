@@ -185,33 +185,36 @@ const experiences: Array<{
   stack: string[];
 }> = [
   {
-    role: { id: "Tech Lead", en: "Tech Lead" },
-    company: "Activalink",
-    period: { id: "2023 — Sekarang", en: "2023 — Present" },
-    location: { id: "Alcoy, Spanyol", en: "Alcoy, Spain" },
+    role: {
+      id: "Administrative & Data Management Support",
+      en: "Administrative & Data Management Support",
+    },
+    company: "Haidar Plastik",
+    period: { id: "Juni 2026 – Sekarang", en: "June 2026 – Present" },
+    location: { id: "Bekasi, Indonesia", en: "Bekasi, Indonesia" },
     summary: {
-      id: "Activalink mengimplementasikan dan menyesuaikan ERP untuk UKM serta perusahaan besar. Saya membangun modul kustom di atas Odoo, integrasi khusus, dan proyek implementasi end-to-end. Memimpin tim beranggotakan 3 developer: pekerjaan kami dinilai dari efisiensi waktu yang dihemat dan pengurangan kesalahan operasional.",
-      en: "Activalink implements and customises ERPs for SMBs and large companies. I build custom modules and personalisations on top of Odoo, bespoke integrations, and end-to-end implementation projects. I lead a team of 3 developers: our work is measured in time saved and errors avoided.",
+      id: "Mendukung digitalisasi, pengelolaan, dan analisis data operasional toko untuk memahami pergerakan stok dan kondisi pembelian.",
+      en: "Supporting the digitization, management, and operational data analysis of store operations to understand stock movements and purchasing patterns.",
     },
     bullets: [
       {
-        id: "OCR faktur di Odoo — dari 4 jam/hari menjadi 30 menit (−87%).",
-        en: "Invoice OCR in Odoo — from 4 h/day down to 30 min (−87 %).",
+        id: "Digitalisasi data — mencatat transaksi, produk, dan inventory dari dokumen fisik ke sistem digital.",
+        en: "Data digitization — recording transactions, products, and inventory from physical documents into digital systems.",
       },
       {
-        id: "Peta logistik interaktif — pengurangan kesalahan pelacakan hingga 60%.",
-        en: "Interactive logistics map — −60 % tracking errors.",
+        id: "Data cleaning — membersihkan dan memvalidasi data sebelum digunakan untuk analisis.",
+        en: "Data cleaning — cleaning and validating data prior to analysis.",
       },
       {
-        id: "Rekonsiliasi otomatis — penutupan buku bulanan dari 3 hari menjadi setengah hari.",
-        en: "Automated reconciliation — monthly close from 3 days to half a day.",
+        id: "Inventory analysis — menganalisis perubahan stok untuk mengidentifikasi produk dengan pergerakan rendah.",
+        en: "Inventory analysis — analyzing stock changes to identify slow-moving products.",
       },
       {
-        id: "Dashboard keuangan — deteksi dini pesanan yang belum ditagihkan.",
-        en: "Financial dashboards — early detection of uninvoiced orders.",
+        id: "Business visualization — membuat visualisasi data stok dan pembelian menggunakan dashboard untuk mendukung analisis bisnis.",
+        en: "Business visualization — creating stock and purchase data visualizations using dashboards to support business insights.",
       },
     ],
-    stack: ["Odoo", "Python", "PostgreSQL", "Next.js", "TypeScript", "Docker"],
+    stack: ["Tableau", "Power BI", "Excel", "Android", "Google Sheets"],
   },
 ];
 
