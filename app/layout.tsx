@@ -23,12 +23,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Txema Albero — Software Engineer & Tech Lead",
+  title: "Haidar Labib Izzakif — Data Analyst | Data Science",
   description:
-    "Portfolio inmersivo de Txema Albero — Software Engineer / Tech Lead. Experiencias web 3D con Next.js y React Three Fiber.",
-  authors: [{ name: "Txema Albero" }],
+    "Portfolio inmersivo de Haidar Labib Izzakif — Data Analyst | Data Science. Experiencias web 3D con Next.js y React Three Fiber.",
+  authors: [{ name: "Haidar Labib Izzakif" }],
   openGraph: {
-    title: "Txema Albero — Software Engineer & Tech Lead",
+    title: "Haidar Labib Izzakif — Data Analyst | Data Science",
     description:
       "Portfolio inmersivo con escena 3D interactiva. Next.js, React Three Fiber, GLSL.",
     type: "website",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Txema Albero — Software Engineer & Tech Lead",
+    title: "Haidar Labib Izzakif — Data Analyst | Data Science",
     description:
       "Portfolio inmersivo con escena 3D interactiva. Next.js, React Three Fiber, GLSL.",
   },

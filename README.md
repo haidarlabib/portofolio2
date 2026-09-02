@@ -2,7 +2,7 @@
 
 An immersive, interactive developer portfolio built with **Next.js 16**, **React Three Fiber**, and **Tailwind CSS v4**. Features a 3D mechanical keyboard hero scene, seasonal themes, smooth scroll animations, bilingual support (ES/EN), and a fully responsive design.
 
-**[Live Demo](https://txemaalbero.com)** &nbsp;|&nbsp; **Built by [Txema Albero](https://es.linkedin.com/in/jose-mar%C3%ADa-albero-belamendia-b9319a246)**
+**Built by [Haidar Labib Izzakif](https://www.linkedin.com/in/haidar-labib-izzakif)**
 
 ---
 
@@ -40,8 +40,8 @@ An immersive, interactive developer portfolio built with **Next.js 16**, **React
 
 ```bash
 # Clone the repository
-git clone https://github.com/Txemalon/3d-portfolio.git
-cd 3d-portfolio
+git clone https://github.com/haidarlabib/portofolio2.git
+cd portofolio2
 
 # Install dependencies
 npm install
@@ -138,7 +138,7 @@ All UI strings live in `lib/i18n.ts` as a flat dictionary with `{ es, en }` leav
 
 ### Vercel (Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Txemalon/3d-portfolio)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/haidarlabib/portofolio2)
 
 ### Docker / Self-Hosted
 
@@ -161,9 +161,8 @@ docker run -p 3000:3000 3d-portfolio
 This project is open source and available under the [MIT License](LICENSE).
 
 ## Author
-
-**Jose Maria Albero Belamendia (Txema)**
-
-- [LinkedIn](https://es.linkedin.com/in/jose-mar%C3%ADa-albero-belamendia-b9319a246)
-- [GitHub](https://github.com/Txemalon)
-- [X / Twitter](https://x.com/Txemalon)
+ 
+**Haidar Labib Izzakif**
+ 
+- [LinkedIn](https://www.linkedin.com/in/haidar-labib-izzakif)
+- [GitHub](https://github.com/haidarlabib)

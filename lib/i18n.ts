@@ -97,10 +97,6 @@ export const DICT = {
     github: { id: "GitHub", en: "GitHub" },
     linkedin: { id: "LinkedIn", en: "LinkedIn" },
     emailToast: { id: "Email disalin", en: "Email copied" },
-    footer: {
-      id: "© 2026 Txema Albero. Hak cipta dilindungi undang-undang.",
-      en: "© 2026 Txema Albero. All rights reserved.",
-    },
   },
   keyboard: {
     taglines: {
