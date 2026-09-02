@@ -766,7 +766,7 @@ export default function Home() {
               <Reveal delay={240}>
                 <div className="flex flex-wrap gap-3 pointer-events-auto">
                   <a
-                    href="https://wa.me/6285695791713?text=Halo%2C%20Haidar.%20Saya%20tertarik%20berkolaborasi%20dengan%20anda%20setelah%20melihat%20portofolio%20anda!."
+                    href="whatsapp://send?phone=6285695791713&text=Halo%2C%20Haidar.%20Saya%20tertarik%20berkolaborasi%20dengan%20anda%20setelah%20melihat%20portofolio%20anda!"
                     target="_blank"
                     rel="noopener noreferrer"
                     data-cursor="hover"
