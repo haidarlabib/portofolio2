@@ -87,6 +87,8 @@ export const STACK_TO_SLUG: Record<string, string> = {
   "Power BI": "powerbi",
   "Scikit-learn": "scikitlearn",
   KNIME: "knime",
+  "Data Preprocessing": "knime",
+  "Association Rule Mining": "knime",
   "Google Sheets": "googlesheets",
   "Google Colab": "googlecolab",
   "Looker Studio": "lookerstudio",
