@@ -82,7 +82,13 @@ const projects: Project[] = [
       id: "Analisis Perilaku Pembelian Pelanggan",
       en: "Customer Purchasing Behavior Analysis",
     },
-    stack: ["KNIME", "Data Preprocessing", "Association Rule Mining"],
+    stack: [
+      "KNIME",
+      "Data Preprocessing",
+      "Association Rule Mining",
+      "Excel",
+      "Spreadsheet",
+    ],
     desc: {
       id: "Menganalisis lebih dari 21.000 transaksi untuk menemukan pola pembelian pelanggan dan menghasilkan rekomendasi produk untuk strategi promosi.",
       en: "Analyzing over 21,000 transactions to uncover customer purchasing patterns and generate product recommendations for promotional strategies.",
@@ -97,7 +103,7 @@ const projects: Project[] = [
       "/projects/association/3.jpeg",
       "/projects/association/4.jpeg",
     ],
-    highlights: ["knime"],
+    highlights: ["knime", "excel", "googlesheets"],
     align: "right",
     section: "project2",
   },

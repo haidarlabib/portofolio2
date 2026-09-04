@@ -90,6 +90,7 @@ export const STACK_TO_SLUG: Record<string, string> = {
   "Data Preprocessing": "knime",
   "Association Rule Mining": "knime",
   "Google Sheets": "googlesheets",
+  Spreadsheet: "googlesheets",
   "Google Colab": "googlecolab",
   "Looker Studio": "lookerstudio",
   MySQL: "mysql",
