@@ -94,6 +94,9 @@ export const STACK_TO_SLUG: Record<string, string> = {
   "Google Colab": "googlecolab",
   "Looker Studio": "lookerstudio",
   MySQL: "mysql",
+  PostgreSQL: "sql",
+  Supabase: "sql",
+  PWA: "android",
   Android: "android",
   GitHub: "github",
 };
