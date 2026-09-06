@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import FrozenKeyboard from "@/components/FrozenKeyboard";
+import HeroProfileCard from "@/components/HeroProfileCard";
 import SmoothScroll from "@/components/smooth-scroll";
 import Reveal from "@/components/Reveal";
 import SectionNav from "@/components/SectionNav";
@@ -464,73 +465,31 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right Column: Personal Profile Portrait */}
+              {/* Right Column: Floating Profile Card & Orbit */}
               <div
                 className="w-full lg:w-auto flex justify-center lg:justify-end flex-shrink-0 pointer-events-auto fade-in-up mt-6 lg:mt-0"
                 style={{ ["--d" as string]: "400ms" }}
               >
-                <div className="relative group">
-                  {/* Subtle atmospheric ambient glow behind portrait */}
-                  <div
-                    className="absolute -inset-4 sm:-inset-6 rounded-full bg-amber-500/15 blur-2xl sm:blur-3xl pointer-events-none -z-10"
-                    aria-hidden
-                  />
-
-                  {/* Editorial Portrait Frame */}
-                  <div className="relative rounded-3xl p-2.5 sm:p-3 bg-gradient-to-b from-ink-1/90 via-ink-2/60 to-ink-0/95 border border-ink-3/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.85)] backdrop-blur-md w-60 sm:w-72 md:w-80 lg:w-[21rem] xl:w-[23rem]">
-                    {/* Subtle warm rim light on top border */}
-                    <div
-                      className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent rounded-t-full"
-                      aria-hidden
-                    />
-
-                    {/* Image inner frame with smooth dark integration */}
-                    <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-gradient-to-b from-ink-0/80 via-ink-1/50 to-ink-0/95 flex items-center justify-center">
-                      {/* Subtle golden atmospheric spotlight behind head */}
-                      <div
-                        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(245,158,11,0.18),transparent_70%)] pointer-events-none"
-                        aria-hidden
-                      />
-
-                      <img
-                        src="/profil-hero.png"
-                        alt="Haidar Labib Izzakif"
-                        className="w-full h-full object-cover object-top filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]"
-                      />
-
-                      {/* Smooth dark gradient fading bottom edge into background */}
-                      <div
-                        className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-ink-0 via-ink-0/60 to-transparent pointer-events-none"
-                        aria-hidden
-                      />
-                    </div>
-
-                    {/* Elegant minimal caption */}
-                    <div className="pt-2.5 pb-1 px-1.5 flex items-center justify-between text-ice-300">
-                      <span className="font-mono tracking-wider text-[10px] sm:text-[11px] uppercase text-ice-400">
-                        Data Analyst
-                      </span>
-                      <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-amber-400/90 font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                        Bekasi, ID
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <HeroProfileCard />
               </div>
             </div>
 
-            {/* Animated scroll indicator at bottom */}
+            {/* Bottom Row: Animated scroll indicator & subtle tagline */}
             <div
-              className="mt-10 md:mt-auto flex items-center gap-3 fade-in-up"
+              className="mt-12 md:mt-auto pt-6 flex items-center justify-between pointer-events-none fade-in-up"
               style={{ ["--d" as string]: "900ms" }}
             >
-              <span className="scroll-indicator">
-                {t("hero.scroll") && <span>{t("hero.scroll")}</span>}
-                <span className="scroll-indicator__rail" />
-              </span>
-              <span className="text-[11px] uppercase tracking-[0.25em] text-ice-400 hidden sm:inline">
-                {t("hero.keysHint")}
+              <div className="flex items-center gap-3">
+                <span className="scroll-indicator">
+                  <span className="scroll-indicator__rail" />
+                </span>
+                <span className="text-[11px] uppercase tracking-[0.25em] text-ice-400">
+                  {lang === "id" ? "Scroll untuk menjelajah" : "Scroll to explore"}
+                </span>
+              </div>
+
+              <span className="text-sm md:text-base font-serif italic text-ice-400/75 select-none hidden sm:inline-block tracking-wide">
+                Better Data, Brighter Tomorrow
               </span>
             </div>
           </section>
