@@ -742,7 +742,7 @@ export default function Home() {
                           }`}
                           aria-hidden="true"
                         >
-                          <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-ink-0/80 border border-ink-3/40 mb-2.5">
+                          <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-ink-0/80 border border-ink-3/40 mb-2">
                             <img
                               src={p.media[0]}
                               alt=""
@@ -751,12 +751,8 @@ export default function Home() {
                             />
                           </div>
                           <p className="text-xs text-ice-200/90 line-clamp-2 leading-relaxed font-normal [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] overflow-hidden">
-                            {pick(p.details, lang).split("\n")[0]}
+                            {pick(p.details, lang)}
                           </p>
-                          <div className="mt-2.5 pt-2 border-t border-ice-100/10 flex items-center justify-between text-[11px] font-mono tracking-wider text-amber-400">
-                            <span>{t("projects.viewMore")}</span>
-                            <span aria-hidden="true">→</span>
-                          </div>
                           {/* Invisible hit bridge to prevent hover flicker between button and preview */}
                           <div className="absolute inset-x-0 -bottom-3 h-3 pointer-events-auto" />
                         </div>
