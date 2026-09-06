@@ -13,6 +13,7 @@ export default function HeroProfileCard() {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     setIsTouchDevice(
@@ -20,21 +21,29 @@ export default function HeroProfileCard() {
     );
   }, []);
 
+  // Motion values for drag position and tracking
+  const dragX = useMotionValue(0);
+  const dragY = useMotionValue(0);
+
+  // Satellite subtle parallax offsets tied to card drag
+  const satelliteX = useTransform(dragX, [-90, 90], [-18, 18]);
+  const satelliteY = useTransform(dragY, [-70, 70], [-14, 14]);
+
   // Mouse position values for 3D tilt
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Smooth springs for natural dampening
-  const springConfig = { stiffness: 140, damping: 18, mass: 0.6 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
+  // Smooth spring physics for natural dampening and settling
+  const springConfig = { stiffness: 150, damping: 20, mass: 0.5 };
+  const smoothTiltX = useSpring(mouseX, springConfig);
+  const smoothTiltY = useSpring(mouseY, springConfig);
 
-  // Map mouse coordinates (-1 to 1) to gentle rotation (-5deg to +5deg)
-  const rotateX = useTransform(smoothY, [-1, 1], [6, -6]);
-  const rotateY = useTransform(smoothX, [-1, 1], [-6, 6]);
+  // Map mouse coordinates (-1 to 1) to gentle rotation (-4deg to +4deg, -5deg to +5deg)
+  const rotateX = useTransform(smoothTiltY, [-1, 1], [4.5, -4.5]);
+  const rotateY = useTransform(smoothTiltX, [-1, 1], [-5, 5]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (shouldReduceMotion || isTouchDevice || !containerRef.current) return;
+    if (shouldReduceMotion || isTouchDevice || isDragging || !containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width; // 0 to 1
     const y = (e.clientY - rect.top) / rect.height; // 0 to 1
@@ -52,7 +61,7 @@ export default function HeroProfileCard() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative flex items-center justify-center p-3 sm:p-6 lg:p-8 select-none pointer-events-auto"
+      className="relative flex items-center justify-center p-3 sm:p-6 lg:p-8 select-none pointer-events-auto touch-pan-y"
       style={{ perspective: 1000 }}
     >
       {/* 1. Ambient Background Glow & Celestial Details */}
@@ -100,97 +109,123 @@ export default function HeroProfileCard() {
         />
       </div>
 
-      {/* 3. Floating Profile Card (Main Target) */}
+      {/* 3. Interactive Floating Profile Card with Drag & Inertia Return */}
       <motion.div
-        animate={
-          shouldReduceMotion
-            ? {}
-            : {
-                y: [-8, 8, -8],
-                rotate: [-1.2, 1.2, -1.2],
-              }
-        }
-        transition={{
-          duration: 5.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        style={{
-          rotateX: shouldReduceMotion || isTouchDevice ? 0 : rotateX,
-          rotateY: shouldReduceMotion || isTouchDevice ? 0 : rotateY,
-          transformStyle: "preserve-3d",
-        }}
-        className="relative group rounded-3xl p-3 sm:p-4 bg-gradient-to-b from-ink-1/90 via-ink-2/65 to-ink-0/95 border border-ink-3/80 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.85)] backdrop-blur-xl w-60 sm:w-72 md:w-80 lg:w-[21.5rem] xl:w-[23rem] transition-shadow duration-500 hover:shadow-[0_35px_80px_-15px_rgba(245,158,11,0.18)]"
+        drag={!isTouchDevice && !shouldReduceMotion}
+        dragSnapToOrigin
+        dragConstraints={{ left: -90, right: 90, top: -70, bottom: 70 }}
+        dragElastic={0.22}
+        dragTransition={{ bounceStiffness: 280, bounceDamping: 22 }}
+        style={{ x: dragX, y: dragY }}
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={() => setIsDragging(false)}
+        className={`${
+          !isTouchDevice && !shouldReduceMotion
+            ? "cursor-grab active:cursor-grabbing"
+            : ""
+        }`}
       >
-        {/* Subtle top rim highlight gradient */}
-        <div
-          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent rounded-t-full"
-          aria-hidden
-        />
-
-        {/* Card Header inside: "BERANDA ●" */}
-        <div className="pb-2.5 px-2 flex items-center justify-end">
-          <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-ice-300">
-            <span>BERANDA</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-ice-100 shadow-[0_0_6px_#fff]" />
-          </span>
-        </div>
-
-        {/* Photo Container Frame with dark gradient integration */}
-        <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-gradient-to-b from-ink-0/80 via-ink-1/50 to-ink-0/95 flex items-center justify-center border border-ink-3/40">
-          {/* Subtle golden ambient spotlight behind head */}
+        <motion.div
+          animate={
+            shouldReduceMotion || isDragging
+              ? { y: 0, rotate: 0 }
+              : {
+                  y: isTouchDevice ? [-5, 5, -5] : [-8, 8, -8],
+                  rotate: isTouchDevice ? 0 : [-1, 1, -1],
+                }
+          }
+          transition={{
+            duration: 5.2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          whileHover={{ scale: 1.018 }}
+          whileDrag={{ scale: 1.03 }}
+          style={{
+            rotateX: shouldReduceMotion || isTouchDevice ? 0 : rotateX,
+            rotateY: shouldReduceMotion || isTouchDevice ? 0 : rotateY,
+            transformStyle: "preserve-3d",
+          }}
+          className="relative group rounded-3xl p-3 sm:p-4 bg-gradient-to-b from-ink-1/90 via-ink-2/65 to-ink-0/95 border border-ink-3/80 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.85)] backdrop-blur-xl w-60 sm:w-72 md:w-80 lg:w-[21.5rem] xl:w-[23rem] transition-shadow duration-500 hover:shadow-[0_35px_80px_-15px_rgba(245,158,11,0.22)]"
+        >
+          {/* Subtle top rim highlight gradient */}
           <div
-            className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(245,158,11,0.2),transparent_70%)] pointer-events-none"
+            className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent rounded-t-full group-hover:via-amber-400/70 transition-all duration-300"
             aria-hidden
           />
 
-          <img
-            src="/profil-hero.png"
-            alt="Haidar Labib Izzakif"
-            className="w-full h-full object-cover object-top filter drop-shadow-[0_14px_28px_rgba(0,0,0,0.7)]"
-          />
+          {/* Card Header inside: "BERANDA ●" */}
+          <div className="pb-2.5 px-2 flex items-center justify-end">
+            <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-ice-300">
+              <span>BERANDA</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-ice-100 shadow-[0_0_6px_#fff]" />
+            </span>
+          </div>
 
-          {/* Smooth dark gradient fading bottom edge into background */}
-          <div
-            className="absolute inset-x-0 bottom-0 h-20 sm:h-24 bg-gradient-to-t from-ink-0 via-ink-0/65 to-transparent pointer-events-none"
-            aria-hidden
-          />
-        </div>
+          {/* Photo Container Frame with dark gradient integration */}
+          <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-gradient-to-b from-ink-0/80 via-ink-1/50 to-ink-0/95 flex items-center justify-center border border-ink-3/40">
+            {/* Subtle golden ambient spotlight behind head */}
+            <div
+              className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(245,158,11,0.2),transparent_70%)] pointer-events-none"
+              aria-hidden
+            />
 
-        {/* Card Footer inside: "DATA ANALYST" & "● Bekasi, ID" */}
-        <div className="pt-3 pb-1 px-2 flex items-center justify-between text-ice-300">
-          <span className="font-mono tracking-wider text-[10px] sm:text-[11px] uppercase text-ice-300 font-medium">
-            DATA ANALYST
-          </span>
-          <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-amber-400 font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#f59e0b]" />
-            Bekasi, ID
-          </span>
-        </div>
+            <img
+              src="/profil-hero.png"
+              alt="Haidar Labib Izzakif"
+              draggable={false}
+              className="w-full h-full object-cover object-top filter drop-shadow-[0_14px_28px_rgba(0,0,0,0.7)] pointer-events-none"
+            />
+
+            {/* Smooth dark gradient fading bottom edge into background */}
+            <div
+              className="absolute inset-x-0 bottom-0 h-20 sm:h-24 bg-gradient-to-t from-ink-0 via-ink-0/65 to-transparent pointer-events-none"
+              aria-hidden
+            />
+          </div>
+
+          {/* Card Footer inside: "DATA ANALYST" & "● Bekasi, ID" */}
+          <div className="pt-3 pb-1 px-2 flex items-center justify-between text-ice-300">
+            <span className="font-mono tracking-wider text-[10px] sm:text-[11px] uppercase text-ice-300 font-medium">
+              DATA ANALYST
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-amber-400 font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#f59e0b]" />
+              Bekasi, ID
+            </span>
+          </div>
+        </motion.div>
       </motion.div>
 
-      {/* 4. Floating Decorative Cards */}
+      {/* 4. Floating Decorative Satellite Cards with Drag-Parallax */}
 
-      {/* Floating Badge 1: [ Data ] (Top-Left) */}
+      {/* Satellite 1: [ Data ] (Top-Left) */}
       <motion.div
-        animate={
-          shouldReduceMotion
-            ? {}
-            : {
-                y: [-7, 7, -7],
-                rotate: [-2, 2, -2],
-              }
-        }
-        transition={{
-          duration: 4.4,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.2,
+        style={{
+          x: shouldReduceMotion ? 0 : satelliteX,
+          y: shouldReduceMotion ? 0 : satelliteY,
         }}
         className="absolute -top-2 -left-2 sm:top-2 sm:-left-5 lg:top-4 lg:-left-7 z-20 pointer-events-auto"
       >
-        <div className="group rounded-2xl p-2 sm:p-2.5 flex flex-col items-center justify-center gap-1 bg-ink-1/90 border border-ice-100/15 backdrop-blur-xl shadow-xl hover:border-sky-400/50 hover:shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all duration-300 min-w-[58px] sm:min-w-[66px]">
-          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-sky-400">
+        <motion.div
+          animate={
+            shouldReduceMotion
+              ? {}
+              : {
+                  y: [-7, 7, -7],
+                  rotate: [-2, 2, -2],
+                }
+          }
+          transition={{
+            duration: 4.4,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.2,
+          }}
+          whileHover={{ scale: 1.08, y: -4 }}
+          className="group rounded-2xl p-2 sm:p-2.5 flex flex-col items-center justify-center gap-1 bg-ink-1/90 border border-ice-100/15 backdrop-blur-xl shadow-xl hover:border-sky-400/50 hover:shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all duration-300 min-w-[58px] sm:min-w-[66px] cursor-pointer"
+        >
+          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-sky-400 group-hover:scale-110 transition-transform">
             <svg
               viewBox="0 0 24 24"
               width="14"
@@ -210,29 +245,36 @@ export default function HeroProfileCard() {
           <span className="text-[10px] sm:text-[11px] font-medium text-ice-200 tracking-wide">
             Data
           </span>
-        </div>
+        </motion.div>
       </motion.div>
 
-      {/* Floating Badge 2: [ Code ] (Top-Right) */}
+      {/* Satellite 2: [ Code ] (Top-Right) */}
       <motion.div
-        animate={
-          shouldReduceMotion
-            ? {}
-            : {
-                y: [7, -7, 7],
-                rotate: [2, -2, 2],
-              }
-        }
-        transition={{
-          duration: 5.2,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.8,
+        style={{
+          x: shouldReduceMotion ? 0 : satelliteX,
+          y: shouldReduceMotion ? 0 : satelliteY,
         }}
         className="absolute -top-3 -right-2 sm:top-1 sm:-right-5 lg:top-3 lg:-right-7 z-20 pointer-events-auto"
       >
-        <div className="group rounded-2xl p-2 sm:p-2.5 flex flex-col items-center justify-center gap-1 bg-ink-1/90 border border-ice-100/15 backdrop-blur-xl shadow-xl hover:border-purple-400/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)] transition-all duration-300 min-w-[58px] sm:min-w-[66px]">
-          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-purple-500/15 border border-purple-400/30 flex items-center justify-center text-purple-400">
+        <motion.div
+          animate={
+            shouldReduceMotion
+              ? {}
+              : {
+                  y: [7, -7, 7],
+                  rotate: [2, -2, 2],
+                }
+          }
+          transition={{
+            duration: 5.2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.8,
+          }}
+          whileHover={{ scale: 1.08, y: -4 }}
+          className="group rounded-2xl p-2 sm:p-2.5 flex flex-col items-center justify-center gap-1 bg-ink-1/90 border border-ice-100/15 backdrop-blur-xl shadow-xl hover:border-purple-400/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)] transition-all duration-300 min-w-[58px] sm:min-w-[66px] cursor-pointer"
+        >
+          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-purple-500/15 border border-purple-400/30 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform">
             <svg
               viewBox="0 0 24 24"
               width="14"
@@ -251,29 +293,36 @@ export default function HeroProfileCard() {
           <span className="text-[10px] sm:text-[11px] font-medium text-ice-200 tracking-wide">
             Code
           </span>
-        </div>
+        </motion.div>
       </motion.div>
 
-      {/* Floating Badge 3: [ Insight ] (Bottom-Right) */}
+      {/* Satellite 3: [ Insight ] (Bottom-Right) */}
       <motion.div
-        animate={
-          shouldReduceMotion
-            ? {}
-            : {
-                y: [-8, 8, -8],
-                rotate: [-1.5, 1.5, -1.5],
-              }
-        }
-        transition={{
-          duration: 4.8,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1.4,
+        style={{
+          x: shouldReduceMotion ? 0 : satelliteX,
+          y: shouldReduceMotion ? 0 : satelliteY,
         }}
         className="absolute bottom-10 -right-2 sm:bottom-14 sm:-right-5 lg:bottom-16 lg:-right-7 z-20 pointer-events-auto"
       >
-        <div className="group rounded-2xl p-2 sm:p-2.5 flex flex-col items-center justify-center gap-1 bg-ink-1/90 border border-ice-100/15 backdrop-blur-xl shadow-xl hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)] transition-all duration-300 min-w-[58px] sm:min-w-[66px]">
-          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center text-cyan-400">
+        <motion.div
+          animate={
+            shouldReduceMotion
+              ? {}
+              : {
+                  y: [-8, 8, -8],
+                  rotate: [-1.5, 1.5, -1.5],
+                }
+          }
+          transition={{
+            duration: 4.8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.4,
+          }}
+          whileHover={{ scale: 1.08, y: -4 }}
+          className="group rounded-2xl p-2 sm:p-2.5 flex flex-col items-center justify-center gap-1 bg-ink-1/90 border border-ice-100/15 backdrop-blur-xl shadow-xl hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)] transition-all duration-300 min-w-[58px] sm:min-w-[66px] cursor-pointer"
+        >
+          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
             <svg
               viewBox="0 0 24 24"
               width="14"
@@ -291,29 +340,36 @@ export default function HeroProfileCard() {
           <span className="text-[10px] sm:text-[11px] font-medium text-ice-200 tracking-wide">
             Insight
           </span>
-        </div>
+        </motion.div>
       </motion.div>
 
-      {/* Floating Badge 4: [ Solution ] (Bottom-Left) */}
+      {/* Satellite 4: [ Solution ] (Bottom-Left) */}
       <motion.div
-        animate={
-          shouldReduceMotion
-            ? {}
-            : {
-                y: [8, -8, 8],
-                rotate: [2, -2, 2],
-              }
-        }
-        transition={{
-          duration: 5.6,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.5,
+        style={{
+          x: shouldReduceMotion ? 0 : satelliteX,
+          y: shouldReduceMotion ? 0 : satelliteY,
         }}
         className="absolute bottom-3 -left-2 sm:bottom-6 sm:-left-4 lg:bottom-8 lg:-left-6 z-20 pointer-events-auto"
       >
-        <div className="group rounded-2xl p-2 sm:p-2.5 flex flex-col items-center justify-center gap-1 bg-ink-1/90 border border-ice-100/15 backdrop-blur-xl shadow-xl hover:border-amber-400/50 hover:shadow-[0_0_20px_rgba(245,158,11,0.25)] transition-all duration-300 min-w-[58px] sm:min-w-[66px]">
-          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center text-amber-400">
+        <motion.div
+          animate={
+            shouldReduceMotion
+              ? {}
+              : {
+                  y: [8, -8, 8],
+                  rotate: [2, -2, 2],
+                }
+          }
+          transition={{
+            duration: 5.6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
+          whileHover={{ scale: 1.08, y: -4 }}
+          className="group rounded-2xl p-2 sm:p-2.5 flex flex-col items-center justify-center gap-1 bg-ink-1/90 border border-ice-100/15 backdrop-blur-xl shadow-xl hover:border-amber-400/50 hover:shadow-[0_0_20px_rgba(245,158,11,0.25)] transition-all duration-300 min-w-[58px] sm:min-w-[66px] cursor-pointer"
+        >
+          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
             <svg
               viewBox="0 0 24 24"
               width="14"
@@ -334,7 +390,7 @@ export default function HeroProfileCard() {
           <span className="text-[10px] sm:text-[11px] font-medium text-ice-200 tracking-wide">
             Solution
           </span>
-        </div>
+        </motion.div>
       </motion.div>
     </div>
   );

@@ -467,7 +467,7 @@ export default function Home() {
 
               {/* Right Column: Floating Profile Card & Orbit */}
               <div
-                className="w-full lg:w-auto flex justify-center lg:justify-end flex-shrink-0 pointer-events-auto fade-in-up mt-6 lg:mt-0"
+                className="w-full lg:w-auto flex justify-center lg:justify-center flex-shrink-0 pointer-events-auto fade-in-up mt-6 lg:mt-0 lg:mr-8 xl:mr-16 2xl:mr-24"
                 style={{ ["--d" as string]: "400ms" }}
               >
                 <HeroProfileCard />
