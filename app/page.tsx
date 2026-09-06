@@ -729,27 +729,61 @@ export default function Home() {
                         : "flex pointer-events-auto"
                     }
                   >
-                    <button
-                      type="button"
-                      onClick={() => setActiveProject(p)}
-                      data-cursor="hover"
-                      data-magnetic
-                      className="frost-btn"
-                    >
-                      {t("projects.viewMore")}
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="14"
-                        height="14"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        aria-hidden
+                    <div className="relative inline-flex group">
+                      {/* Hover Teaser Preview (Desktop only) */}
+                      {p.media?.[0] && (
+                        <div
+                          role="button"
+                          tabIndex={-1}
+                          onClick={() => setActiveProject(p)}
+                          data-cursor="hover"
+                          className={`absolute bottom-full mb-3 z-30 hidden md:block w-72 p-3 rounded-2xl bg-ink-1/95 border border-ice-100/15 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] cursor-pointer pointer-events-none group-hover:pointer-events-auto opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out motion-reduce:transition-none motion-reduce:transform-none text-left ${
+                            p.align === "right" ? "right-0" : "left-0"
+                          }`}
+                          aria-hidden="true"
+                        >
+                          <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-ink-0/80 border border-ink-3/40 mb-2.5">
+                            <img
+                              src={p.media[0]}
+                              alt=""
+                              className="w-full h-full object-cover object-top"
+                              loading="lazy"
+                            />
+                          </div>
+                          <p className="text-xs text-ice-200/90 line-clamp-2 leading-relaxed font-normal [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] overflow-hidden">
+                            {pick(p.details, lang).split("\n")[0]}
+                          </p>
+                          <div className="mt-2.5 pt-2 border-t border-ice-100/10 flex items-center justify-between text-[11px] font-mono tracking-wider text-amber-400">
+                            <span>{t("projects.viewMore")}</span>
+                            <span aria-hidden="true">→</span>
+                          </div>
+                          {/* Invisible hit bridge to prevent hover flicker between button and preview */}
+                          <div className="absolute inset-x-0 -bottom-3 h-3 pointer-events-auto" />
+                        </div>
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={() => setActiveProject(p)}
+                        data-cursor="hover"
+                        data-magnetic
+                        className="frost-btn"
                       >
-                        <path d="M5 12h14M13 5l7 7-7 7" />
-                      </svg>
-                    </button>
+                        {t("projects.viewMore")}
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="14"
+                          height="14"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          aria-hidden
+                        >
+                          <path d="M5 12h14M13 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 </Reveal>
               </div>
