@@ -36,13 +36,13 @@ type KeyboardState = {
 
 const SECTION_STATES: Record<string, KeyboardState> = {
   hero: {
-    yaw: Math.PI * 0.15,
-    pitch: Math.PI * 0.18,
-    roll: Math.PI * 0.025,
-    posX: 1.5,
-    posY: 0,
+    yaw: Math.PI * 0.4,
+    pitch: Math.PI * 0.14,
+    roll: -Math.PI * -0.13,
+    posX: 0,
+    posY: -2.8,
     posZ: 0,
-    scale: 1,
+    scale: 0,
   },
   stack: {
     // Naresh's reference: keyboard lives in the lower-right, moderate
@@ -686,18 +686,17 @@ function Keyboard({ mobile }: { mobile: boolean }) {
     // small hop on Y so the flip reads as a tiny jump-and-turn.
     const spinNorm = Math.min(1, Math.abs(spinRef.current) / (Math.PI * 2));
 
-    // Idle motion layered on top. Hero and Contact share a wide cinematic
+    // Idle motion layered on top. Contact shares a wide cinematic
     // yoyo so the keyboard "shows itself"; other sections keep a quiet
     // breathing so the copy is easier to read.
     const isShowcase =
-      mobile ||
-      activeSectionRef.current === "hero" ||
-      activeSectionRef.current === "contact";
+      mobile || activeSectionRef.current === "contact";
     const yawSwing = isShowcase ? 0.5 : 0.025;
     const pitchSwing = isShowcase ? 0.07 : 0.0;
     const rollSwing = isShowcase ? 0.05 : 0.0;
     const period = isShowcase ? 9 : 20; // seconds per full cycle
     const w = (Math.PI * 2) / period;
+    ref.current.visible = mobile || c.scale > 0.005;
     ref.current.rotation.y =
       c.yaw + Math.sin(t * w) * yawSwing + spinRef.current;
     ref.current.rotation.x = c.pitch + Math.sin(t * w * 0.6) * pitchSwing;

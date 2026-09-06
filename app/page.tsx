@@ -372,100 +372,151 @@ export default function Home() {
             data-kb-section="hero"
             className="min-h-screen flex flex-col justify-center p-6 sm:p-10 md:p-14"
           >
-            {/* Mobile-only 3D centerpiece. Lives inside the hero (scrolls away
-                with it) and takes pointer events so keycaps are tappable. */}
-            {isMobile && (
-              <div className="w-full h-[34vh] mt-12 -mb-4 pointer-events-auto">
-                <FrozenKeyboard mobile />
-              </div>
-            )}
-            <div className="mt-2 md:mt-20">
-              <p
-                className="text-[11px] uppercase tracking-[0.3em] text-ice-300 mb-5 fade-in-up"
-                style={{ ["--d" as string]: "0ms" }}
-              >
-                {t("hero.greeting")}
-              </p>
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[8.5rem] font-bold tracking-[-0.03em] text-ice-50 leading-[0.92] whitespace-nowrap">
-                <HeroWord text="Haidar" delay={120} />
-                <br />
-                <HeroWord text="Labib" delay={200} className="text-ice-400" />
-                <br />
-                <HeroWord text="Izzakif" delay={280} className="text-ice-400" />
-              </h1>
-              <p
-                className="mt-8 text-base sm:text-lg md:text-xl text-ice-200 max-w-xl leading-relaxed fade-in-up"
-                style={{ ["--d" as string]: "520ms" }}
-              >
-                {t("hero.roleLine")}
-                <br />
-                {t("hero.tagline")}
-              </p>
+            <div className="mt-2 md:mt-16 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14">
+              {/* Left Column: Identity, Description & CTAs */}
+              <div className="flex-1 max-w-xl xl:max-w-2xl w-full">
+                <p
+                  className="text-[11px] uppercase tracking-[0.3em] text-ice-300 mb-5 fade-in-up"
+                  style={{ ["--d" as string]: "0ms" }}
+                >
+                  {t("hero.greeting")}
+                </p>
+                <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] font-bold tracking-[-0.03em] text-ice-50 leading-[0.92] whitespace-nowrap">
+                  <HeroWord text="Haidar" delay={120} />
+                  <br />
+                  <HeroWord text="Labib" delay={200} className="text-ice-400" />
+                  <br />
+                  <HeroWord text="Izzakif" delay={280} className="text-ice-400" />
+                </h1>
+                <p
+                  className="mt-8 text-base sm:text-lg md:text-xl text-ice-200 max-w-xl leading-relaxed fade-in-up"
+                  style={{ ["--d" as string]: "520ms" }}
+                >
+                  {t("hero.roleLine")}
+                  <br />
+                  {t("hero.tagline")}
+                </p>
 
-              {/* CTAs */}
+                {/* CTAs */}
+                <div
+                  className="mt-10 flex flex-wrap items-center gap-3 pointer-events-auto fade-in-up"
+                  style={{ ["--d" as string]: "700ms" }}
+                >
+                  <a
+                    href={lang === "en" ? "/cv_en.pdf" : "/cv.pdf"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="hover"
+                    data-magnetic
+                    className="frost-btn frost-btn--primary"
+                  >
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                      <path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z" />
+                      <path d="M14 3v5h5" />
+                    </svg>
+                    {t("hero.cv")}
+                  </a>
+                  <button
+                    type="button"
+                    data-cursor="hover"
+                    data-magnetic
+                    className="frost-btn"
+                    onClick={() =>
+                      document
+                        .querySelector<HTMLElement>(
+                          '[data-kb-section="contact"]'
+                        )
+                        ?.scrollIntoView({ behavior: "smooth", block: "start" })
+                    }
+                  >
+                    {t("hero.hire")}
+                  </button>
+                  {/* Mobile-only full-width break: forces the social icons onto
+                      their own row below the two primary buttons. Hidden on md+
+                      so desktop keeps everything on a single line. */}
+                  <div className="basis-full h-0 md:hidden" aria-hidden />
+                  <a
+                    href="https://www.linkedin.com/in/haidar-labib-izzakif"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="hover"
+                    data-magnetic
+                    className="frost-icon"
+                    aria-label="LinkedIn"
+                  >
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden>
+                      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.4 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 6.99V22h-4.56v-6.59c0-1.57-.03-3.6-2.19-3.6-2.19 0-2.53 1.71-2.53 3.48V22H7.62V8z" />
+                    </svg>
+                  </a>
+                  <a
+                    href="https://github.com/haidarlabib"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="hover"
+                    data-magnetic
+                    className="frost-icon"
+                    aria-label="GitHub"
+                  >
+                    <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden>
+                      <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Right Column: Personal Profile Portrait */}
               <div
-                className="mt-10 flex flex-wrap items-center gap-3 pointer-events-auto fade-in-up"
-                style={{ ["--d" as string]: "700ms" }}
+                className="w-full lg:w-auto flex justify-center lg:justify-end flex-shrink-0 pointer-events-auto fade-in-up mt-6 lg:mt-0"
+                style={{ ["--d" as string]: "400ms" }}
               >
-                <a
-                  href={lang === "en" ? "/cv_en.pdf" : "/cv.pdf"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-cursor="hover"
-                  data-magnetic
-                  className="frost-btn frost-btn--primary"
-                >
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                    <path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z" />
-                    <path d="M14 3v5h5" />
-                  </svg>
-                  {t("hero.cv")}
-                </a>
-                <button
-                  type="button"
-                  data-cursor="hover"
-                  data-magnetic
-                  className="frost-btn"
-                  onClick={() =>
-                    document
-                      .querySelector<HTMLElement>(
-                        '[data-kb-section="contact"]'
-                      )
-                      ?.scrollIntoView({ behavior: "smooth", block: "start" })
-                  }
-                >
-                  {t("hero.hire")}
-                </button>
-                {/* Mobile-only full-width break: forces the social icons onto
-                    their own row below the two primary buttons. Hidden on md+
-                    so desktop keeps everything on a single line. */}
-                <div className="basis-full h-0 md:hidden" aria-hidden />
-                <a
-                  href="https://www.linkedin.com/in/haidar-labib-izzakif"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-cursor="hover"
-                  data-magnetic
-                  className="frost-icon"
-                  aria-label="LinkedIn"
-                >
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden>
-                    <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.4 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 6.99V22h-4.56v-6.59c0-1.57-.03-3.6-2.19-3.6-2.19 0-2.53 1.71-2.53 3.48V22H7.62V8z" />
-                  </svg>
-                </a>
-                <a
-                  href="https://github.com/haidarlabib"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-cursor="hover"
-                  data-magnetic
-                  className="frost-icon"
-                  aria-label="GitHub"
-                >
-                  <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden>
-                    <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-                  </svg>
-                </a>
+                <div className="relative group">
+                  {/* Subtle atmospheric ambient glow behind portrait */}
+                  <div
+                    className="absolute -inset-4 sm:-inset-6 rounded-full bg-amber-500/15 blur-2xl sm:blur-3xl pointer-events-none -z-10"
+                    aria-hidden
+                  />
+
+                  {/* Editorial Portrait Frame */}
+                  <div className="relative rounded-3xl p-2.5 sm:p-3 bg-gradient-to-b from-ink-1/90 via-ink-2/60 to-ink-0/95 border border-ink-3/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.85)] backdrop-blur-md w-60 sm:w-72 md:w-80 lg:w-[21rem] xl:w-[23rem]">
+                    {/* Subtle warm rim light on top border */}
+                    <div
+                      className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent rounded-t-full"
+                      aria-hidden
+                    />
+
+                    {/* Image inner frame with smooth dark integration */}
+                    <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-gradient-to-b from-ink-0/80 via-ink-1/50 to-ink-0/95 flex items-center justify-center">
+                      {/* Subtle golden atmospheric spotlight behind head */}
+                      <div
+                        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(245,158,11,0.18),transparent_70%)] pointer-events-none"
+                        aria-hidden
+                      />
+
+                      <img
+                        src="/profil-hero.png"
+                        alt="Haidar Labib Izzakif"
+                        className="w-full h-full object-cover object-top filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]"
+                      />
+
+                      {/* Smooth dark gradient fading bottom edge into background */}
+                      <div
+                        className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-ink-0 via-ink-0/60 to-transparent pointer-events-none"
+                        aria-hidden
+                      />
+                    </div>
+
+                    {/* Elegant minimal caption */}
+                    <div className="pt-2.5 pb-1 px-1.5 flex items-center justify-between text-ice-300">
+                      <span className="font-mono tracking-wider text-[10px] sm:text-[11px] uppercase text-ice-400">
+                        Data Analyst
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-amber-400/90 font-medium">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                        Bekasi, ID
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -506,6 +557,13 @@ export default function Home() {
                   </p>
                 </Reveal>
               </div>
+
+              {/* Mobile 3D keyboard starts appearing here at Tech Stack */}
+              {isMobile && (
+                <div className="md:hidden w-full h-[32vh] mt-6 -mb-2 pointer-events-auto">
+                  <FrozenKeyboard mobile />
+                </div>
+              )}
 
               {/* Mobile skills grid (recovers the hover interaction as static
                   content the keyboard can't surface on touch). */}
