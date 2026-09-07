@@ -54,7 +54,7 @@ const SECTION_STATES: Record<string, KeyboardState> = {
     posX: 0,
     posY: -0.6,
     posZ: 0,
-    scale: 1.3,
+    scale: 1.12,
   },
   // Project 1 — text is left-aligned, so the keyboard slides to the RIGHT,
   // near the giant "01" watermark.
@@ -131,7 +131,7 @@ const MOBILE_STATE: KeyboardState = {
   posX: 0,
   posY: 0,
   posZ: 0,
-  scale: 1.55,
+  scale: 1.38,
 };
 
 // Track which data-kb-section element is currently most prominent on-screen.
