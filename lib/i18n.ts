@@ -59,7 +59,7 @@ export const DICT = {
     },
   },
   stack: {
-    title: { id: "Tech Stack", en: "Tech Stack" },
+    title: { id: "Tech Skill", en: "Tech Stack" },
     hint: {
       id: "(petunjuk: arahkan kursor ke tombol)",
       en: "(hint: hover over a key)",
@@ -101,63 +101,63 @@ export const DICT = {
   keyboard: {
     taglines: {
       python: {
-        id: "Mengubah data berantakan menjadi wawasan berharga.",
+        id: "Mengolah data mentah menjadi wawasan yang berguna.",
         en: "Turns messy data into meaningful insights.",
       },
       sql: {
-        id: "Tempat data mentah mulai bercerita.",
+        id: "Menggali data untuk menemukan pola yang bermakna.",
         en: "Where raw data starts telling its story.",
       },
       excel: {
-        id: "Masih salah satu cara tercepat untuk menyelesaikan pekerjaan.",
+        id: "Membersihkan, mengolah, dan menganalisis data dengan efisien.",
         en: "Still one of the fastest ways to get things done.",
       },
       powerbi: {
-        id: "Angka terlihat lebih baik saat mudah dipahami.",
+        id: "Mengubah data menjadi dashboard yang mudah dipahami.",
         en: "Numbers look better when they make sense.",
       },
       pandas: {
-        id: "Membuat data yang rumit lebih mudah diolah.",
+        id: "Membersihkan dan menyiapkan data untuk analisis.",
         en: "Makes messy data easier to work with.",
       },
       numpy: {
-        id: "Angka di balik setiap perhitungan.",
+        id: "Mengolah data numerik untuk kebutuhan analisis.",
         en: "The numbers behind the numbers.",
       },
       scikitlearn: {
-        id: "Pola masuk, prediksi keluar.",
+        id: "Menemukan pola dan membangun model prediktif.",
         en: "Patterns in, predictions out.",
       },
       knime: {
-        id: "Tarik, hubungkan, analisis, ulangi.",
+        id: "Menyusun alur kerja data dari proses hingga hasil.",
         en: "Drag, connect, analyze, repeat.",
       },
       googlesheets: {
-        id: "Sederhana, kolaboratif, dan selalu dalam jangkauan.",
+        id: "Mengelola data secara rapi, mudah diakses, dan kolaboratif.",
         en: "Simple, shared, and always within reach.",
       },
       googlecolab: {
-        id: "Notebook yang dibangun untuk eksperimen data.",
+        id: "Ruang praktis untuk analisis dan eksperimen data.",
         en: "A notebook built for data experiments.",
       },
       lookerstudio: {
-        id: "Mengubah data menjadi visual yang bermakna.",
+        id: "Memvisualisasikan data agar insight bisnis lebih mudah dipahami.",
         en: "Turning data into something people can see.",
       },
       flask: {
-        id: "Backend ringkas untuk hal-hal yang bermanfaat.",
+        id: "Mengubah solusi analisis menjadi aplikasi yang dapat digunakan.",
         en: "Small backend, useful things.",
       },
       mysql: {
-        id: "Menjaga data terstruktur tepat pada tempatnya.",
+        id: "Menyimpan dan mengelola data terstruktur dengan rapi.",
         en: "Keeping structured data right where it belongs.",
       },
       android: {
-        id: "Membawa alat data yang berguna ke dalam genggaman.",
+        id: "Menghadirkan tools data yang praktis untuk kebutuhan operasional.",
         en: "Putting useful data tools in your pocket.",
       },
       github: {
-        id: "Tempat hasil karya tersimpan dan terus berkembang.",
+        id: "Mengelola dan mengembangkan projek secara terstruktur.",
         en: "Where the work lives and keeps evolving.",
       },
     },

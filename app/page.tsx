@@ -194,38 +194,6 @@ const experiences: Array<{
 }> = [
   {
     role: {
-      id: "Administrative & Data Management Support",
-      en: "Administrative & Data Management Support",
-    },
-    company: "Haidar Plastik",
-    period: { id: "Juni 2026 – Sekarang", en: "June 2026 – Present" },
-    location: { id: "Bekasi, Indonesia", en: "Bekasi, Indonesia" },
-    summary: {
-      id: "Mendukung digitalisasi, pengelolaan, dan analisis data operasional toko untuk memahami pergerakan stok dan kondisi pembelian.",
-      en: "Supporting the digitization, management, and operational data analysis of store operations to understand stock movements and purchasing patterns.",
-    },
-    bullets: [
-      {
-        id: "Digitalisasi data — mencatat transaksi, produk, dan inventory dari dokumen fisik ke sistem digital.",
-        en: "Data digitization — recording transactions, products, and inventory from physical documents into digital systems.",
-      },
-      {
-        id: "Data cleaning — membersihkan dan memvalidasi data sebelum digunakan untuk analisis.",
-        en: "Data cleaning — cleaning and validating data prior to analysis.",
-      },
-      {
-        id: "Inventory analysis — menganalisis perubahan stok untuk mengidentifikasi produk dengan pergerakan rendah.",
-        en: "Inventory analysis — analyzing stock changes to identify slow-moving products.",
-      },
-      {
-        id: "Business visualization — membuat visualisasi data stok dan pembelian menggunakan dashboard untuk mendukung analisis bisnis.",
-        en: "Business visualization — creating stock and purchase data visualizations using dashboards to support business insights.",
-      },
-    ],
-    stack: ["Tableau", "Power BI", "Excel", "Android", "Google Sheets"],
-  },
-  {
-    role: {
       id: "Administration Intern",
       en: "Administration Intern",
     },
