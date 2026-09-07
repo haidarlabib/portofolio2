@@ -1,6 +1,4 @@
 import {
-  siAndroid,
-  siFlask,
   siGithub,
   siGooglecolab,
   siGooglesheets,
@@ -10,7 +8,6 @@ import {
   siNumpy,
   siPandas,
   siPython,
-  siScikitlearn,
 } from "simple-icons";
 
 export type SkillIcon = {
@@ -44,7 +41,7 @@ const powerBiIcon: SkillIcon = {
   hex: "F2C811",
 };
 
-// 3×5 grid — consumed by the 3D keyboard (one icon per keycap) and, on mobile,
+// 3×4 grid — consumed by the 3D keyboard (one icon per keycap) and, on mobile,
 // by the flat list below for the static skills grid that replaces the
 // hover-driven keyboard interaction. Taglines live in the i18n dictionary
 // under `keyboard.taglines.<slug>`.
@@ -54,20 +51,17 @@ export const SKILLS_GRID: readonly (readonly SkillIcon[])[] = [
     sqlIcon,
     excelIcon,
     powerBiIcon,
-    { title: "Pandas", slug: "pandas", path: siPandas.path, hex: siPandas.hex },
   ],
   [
+    { title: "Pandas", slug: "pandas", path: siPandas.path, hex: siPandas.hex },
     { title: "NumPy", slug: "numpy", path: siNumpy.path, hex: siNumpy.hex },
-    { title: "Scikit-learn", slug: "scikitlearn", path: siScikitlearn.path, hex: siScikitlearn.hex },
     { title: "KNIME", slug: "knime", path: siKnime.path, hex: siKnime.hex },
     { title: "Google Sheets", slug: "googlesheets", path: siGooglesheets.path, hex: siGooglesheets.hex },
-    { title: "Google Colab", slug: "googlecolab", path: siGooglecolab.path, hex: siGooglecolab.hex },
   ],
   [
+    { title: "Google Colab", slug: "googlecolab", path: siGooglecolab.path, hex: siGooglecolab.hex },
     { title: "Looker Studio", slug: "lookerstudio", path: siLooker.path, hex: siLooker.hex },
-    { title: "Flask", slug: "flask", path: siFlask.path, hex: siFlask.hex },
     { title: "MySQL", slug: "mysql", path: siMysql.path, hex: siMysql.hex },
-    { title: "Android", slug: "android", path: siAndroid.path, hex: siAndroid.hex },
     { title: "GitHub", slug: "github", path: siGithub.path, hex: siGithub.hex },
   ],
 ] as const;
@@ -78,14 +72,10 @@ export const STACK_TO_SLUG: Record<string, string> = {
   Python: "python",
   Pandas: "pandas",
   NumPy: "numpy",
-  Regression: "scikitlearn",
-  Forecasting: "scikitlearn",
-  Flask: "flask",
   PHP: "php",
   SQL: "sql",
   Excel: "excel",
   "Power BI": "powerbi",
-  "Scikit-learn": "scikitlearn",
   KNIME: "knime",
   "Data Preprocessing": "knime",
   "Association Rule Mining": "knime",
@@ -96,7 +86,5 @@ export const STACK_TO_SLUG: Record<string, string> = {
   MySQL: "mysql",
   PostgreSQL: "sql",
   Supabase: "sql",
-  PWA: "android",
-  Android: "android",
   GitHub: "github",
 };
